@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { v2 as cloudinary } from "cloudinary";
+// import { v2 as cloudinary } from "cloudinary";
 import { options } from "../constants/config.js";
 import { userSocketIds } from "../app.js";
 
@@ -17,28 +17,26 @@ const sendToken = (res, user, code, message) => {
   });
 };
 
-const uploadToCloud = async (file) => {
-  try {
-    const data = await cloudinary.uploader.upload(file.path, {
-      resource_type: "auto",
-    });
-    return {
-      url: data.url,
-      public_id: data.public_id,
-    };
-  } catch (err) {
-    throw new Error("Failed to Upload" + err.message);
-  }
-};
-
-
+// const uploadToCloud = async (file) => {
+//   try {
+//     const data = await cloudinary.uploader.upload(file.path, {
+//       resource_type: "auto",
+//     });
+//     return {
+//       url: data.url,
+//       public_id: data.public_id,
+//     };
+//   } catch (err) {
+//     throw new Error("Failed to Upload" + err.message);
+//   }
+// };
 
 const emitEvent = (req, event, users, data) => {
   try {
     const io = req.app.get("io");
     const usersSocket = getSocketIds(users);
     io.to(usersSocket).emit(event, data);
-    console.log(users)
+    console.log(users);
     console.log("Event emiting", event);
   } catch (err) {
     console.log("Failed to emit event", err.message);
