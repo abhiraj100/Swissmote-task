@@ -52,4 +52,4 @@ const getSocketIds = (users) => {
   }
 };
 
-export { sendToken, uploadToCloud, getSocketIds, emitEvent };
+export { sendToken, getSocketIds, emitEvent };
